@@ -1,0 +1,4 @@
+id,name,rxns,product_id,product_tags,precursor_ids,litref,notes
+etoh,Ethanol,"['ACALD', 'ALCD2x']",etoh,alcohol,accoa,,Native E. coli ethanol pathway
+lac__D,D-Lactate,['LDH_D'],lac__D,organic acid,pyr,"('PMID', 24884499)",
+ac,Acetate,"['PTAr', 'ACKr']",ac,organic acid,accoa,,

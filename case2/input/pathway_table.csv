@@ -1,0 +1,11 @@
+id,name,rxns,product_id,product_tags,precursor_ids,litref,notes
+etoh,Ethanol,"['ACALD', 'ALCD2x']",etoh,alcohol,accoa,,Native E. coli ethanol pathway
+lac__D,D-Lactate,['LDH_D'],lac__D,organic acid,pyr,"('PMID', 24884499)",
+ac,Acetate,"['PTAr', 'ACKr']",ac,organic acid,accoa,,native E. coli pathway
+ppoh,Propanol,"['ASPTA', 'ASPK', 'ASAD', 'HSDy', 'HSK', 'THRS', 'THRD_L', 'OBDHc', 'ALDD3procoa', 'ALCD3ir']",ppoh,alcohol,['oaa'],"('PMC', 'PMC3497732')","The key precursor, based on the included reactions is oaa."
+btoh,Butanol,"['ACACT1r', 'HACD1', 'ECOAH1', 'ACOAD1', 'BTCOARx', 'ALCD4']",btoh,alcohol,accoa,"('PMC', 'PMC3126405')",
+ibutoh,Isobutanol,"['ACLS', 'KARA1', 'DHAD1', 'OIVD2', 'IBUTCOA', 'ALCD23xi']",ibutoh,alcohol,pyr,"('PMID', 18172501)",
+ptoh,Pentanol,"['ASPTA', 'ASPK', 'ASAD', 'HSDy', 'HSK', 'THRS', 'THRD_L', 'OBDHc', 'VCACT', 'HVCD', 'VECOAH', 'VCOAD2', 'PTCOAR', 'ALCDptoh']",ptoh,alcohol,['oaa'],"('PMC', 'PMC3497732')","The key precursor, based on the included reactions is oaa.Similar to propanol pathway."
+for,Formate,['PFL'],for,organic acid,pyr,,
+pyr,Pyruvate,[],pyr,organic acid,pyr,"('PMC', 'PMC5055523')",
+glu__L,Glutamate,['GLUDy'],glu__L,amino acid,succoa,,

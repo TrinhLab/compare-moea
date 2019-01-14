@@ -1,0 +1,2 @@
+*.mlx -crlf -diff -merge
+*.mat -crlf -diff -merge
