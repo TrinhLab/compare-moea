@@ -29,7 +29,7 @@ de.ga_parameters.progress_plot		= false;
 
 %% main loop
 % paralellization (with parfor) of this loop makes some of the PlatEMO MOEA
-% fail. 
+% fail.
 for i=1:length(algorithms)
     par_dummy(c,de,dp, algorithms, i)
 end
@@ -42,12 +42,12 @@ for rep_ind = 1:c.n_replicates
     fprintf('---- ---- Replicate: %d \n', rep_ind);
     rng(rep_ind) % fix rng state
     try
-          start_point_info = [];
+        start_point_info = [];
         total_max_generations = c.n_generations;%total_generations-population_interval;
         total_max_time = 10000000;
         solve_max_gen = true;
         
-        [~,run_time_min, populations] = de.solve_mop(...
+        [~, run_time_min, populations] = de.solve_mop(...
             dp,start_point_info,total_max_generations,total_max_time, solve_max_gen);
         
         file_id = [algorithms{i},'_',num2str(rep_ind)];
@@ -59,7 +59,7 @@ for rep_ind = 1:c.n_replicates
         parsave(fullfile(c.output_path,file_id), out)
         fprintf('%s saved to ouput folder\n', file_id)
     catch ME
-        fprintf('ITERATION FAILED, algorithm: %d, error message: \n %s',de.ga_parameters.algorithm,ME.message) 
+        fprintf('ITERATION FAILED, algorithm: %s, error message: \n %s',de.ga_parameters.algorithm,ME.message)
     end
 end
 end
