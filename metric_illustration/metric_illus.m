@@ -23,7 +23,8 @@ figure('visible','off','position',[0,0,width,height])
 %height=300;
 %figure('visible','off','position',[0,0,width,height])
 subplot(2,1,1)
-colors = sns_colors;
+colors = flip(sns_colors,1);
+
 hold on
 plot(pf1(:,1),pf1(:,2),'--o','MarkerSize',5,'MarkerFaceColor',colors(1,:),'Color',colors(1,:),'LineWidth',2)
 plot(pf2(:,1),pf2(:,2),'--o','MarkerSize',5,'MarkerFaceColor',colors(2,:),'Color',colors(2,:),'LineWidth',2)
@@ -44,11 +45,12 @@ legend({'Generation 1', 'Generation 2', 'Generation 3', 'Generation 4/True PF'})
 %print(fullfile(root_dir,'metric_illustration','pf'),'-dsvg','-painters','-r0')
 
 %% Plt gen-metrics
-subplot(2,1,2)
+subplot(2,1,2)j
+colors = sns_colors;
 
-metrics = {'Coverage','HV','Epsilon',...
-    'GD','IGD','DeltaP',...
-    'DM'};
+metrics = {'Coverage','HV','Epsilon','GD','IGD','DeltaP'};
+mnames = {'C','\mathit{HV}','\epsilon','\mathit{IGD}','\mathit{GD}','\Delta_p'};
+mnames = cellfun(@(x)(['$',x,'$']),mnames,'UniformOutput',false);
 score_gen = nan(length(gen),1);
 
 hold on
@@ -69,7 +71,7 @@ for metric_ind = 1:length(metrics)
 end
 hold off
 
-legend(metrics)
+legend(mnames,'Interpreter','latex')
 xticks(1:length(gen))
 set_fig_defaults;
 axis square

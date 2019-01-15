@@ -1,6 +1,7 @@
 function Score = DeltaP(PopObj,PF)
 % <metric> <min>
 % Averaged Hausdorff distance
+% Sergio Garcia: Correct definition to compute the norm with p=2 instead of means.
 
 %------------------------------- Reference --------------------------------
 % O. Schutze, X. Esquivel, A. Lara, and C. A. Coello Coello, Using the
@@ -16,7 +17,5 @@ function Score = DeltaP(PopObj,PF)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    IGDp  = mean(min(pdist2(PF,PopObj),[],2));
-    GDp   = mean(min(pdist2(PopObj,PF),[],2));
-    Score = max(IGDp,GDp);
+    Score = max(IGD(PopObj,PF),GD(PopObj,PF));
 end

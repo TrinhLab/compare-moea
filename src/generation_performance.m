@@ -3,10 +3,13 @@ function generation_performance(prob_path, metrics, plot_replicates)
 % prob_path/analysis
 
 if ~exist('metrics','var')
-    metrics = {'Coverage','HV','Epsilon',...
-        'GD','IGD','DeltaP',...
-        'DM'};
+    metrics = {'Coverage','HV','Epsilon','DeltaP'};
 end
+mnames = {'C','\mathit{HV}','\epsilon','\Delta_p'};
+mnames = cellfun(@(x)(['$',x,'$']),mnames,'UniformOutput',false);
+
+metric_names = containers.Map(metrics,mnames);
+
 if ~exist('plot_replicates','var')
     plot_replicates = true;
 end
@@ -61,18 +64,17 @@ for metric_ind = 1:length(metrics)
 end
 
 %% Generation line plot
-nrows=3;
-ncols=3;
+nrows=4;
+ncols=1;
+width=ncols*400;
+height=nrows*400;
 
-%nrows = length(metrics); %length(problems);
-%ncols = 1;
 colors = [sns_colors; sns_colors('deep')];
 
 transparency = 0.2;
 
 
-width=nrows*400;
-height=ncols*400;
+
 figure('visible','off','position',[0,0,width,height])
 
 clear linealg
@@ -96,7 +98,8 @@ for row_ind = 1:nrows
             % plot average
             linealg(alg_ind) = plot(x, stats.(algorithms{alg_ind}).(metrics{metric_ind}).mean ,'Color',colors(alg_ind,:),'LineWidth',1.3);
         end
-        ylabel([metrics{metric_ind}])
+        ylabel(metric_names(metrics{metric_ind}),'Interpreter','latex');
+
         hold off
         set_fig_defaults
         axis square
@@ -106,13 +109,13 @@ end
 xlabel('Generations')
 
 print(fullfile(prob_path,'analysis','generations-line'),'-dsvg','-painters','-r0')
-legend(linealg,algorithms);
+legend(linealg, algorithms);
+
 print(fullfile(prob_path,'analysis','generations-line-legend'),'-dsvg','-painters','-r0')
 
 %% Bar plot of last generation
 %figure;
-width=nrows*400;
-height=ncols*400;
+
 figure('visible','off','position',[0,0,width,height])
 
 plot_ind = 1;
@@ -124,7 +127,7 @@ for metr_ind = 1:length(metrics)
         meane(alg_ind,1) = stats.(algorithms{alg_ind}).(metrics{metr_ind}).mean(end);
         stde(alg_ind,1) = stats.(algorithms{alg_ind}).(metrics{metr_ind}).std(end);
     end
-    title(metrics{metr_ind});
+    ylabel(metric_names(metrics{metr_ind}),'Interpreter','latex');
 
     y = meane;                  %The data.
     s = stde;                   %The standard deviation.
