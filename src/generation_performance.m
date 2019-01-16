@@ -64,10 +64,10 @@ for metric_ind = 1:length(metrics)
 end
 
 %% Generation line plot
-nrows=4;
-ncols=1;
-width=ncols*400;
-height=nrows*400;
+nrows=1;
+ncols=4;
+width=ncols*300;
+height=nrows*300;
 
 colors = [sns_colors; sns_colors('deep')];
 
@@ -99,14 +99,15 @@ for row_ind = 1:nrows
             linealg(alg_ind) = plot(x, stats.(algorithms{alg_ind}).(metrics{metric_ind}).mean ,'Color',colors(alg_ind,:),'LineWidth',1.3);
         end
         ylabel(metric_names(metrics{metric_ind}),'Interpreter','latex');
-
+        
         hold off
+        xlabel('Generations')
         set_fig_defaults
         axis square
         metric_ind = metric_ind+1;
+        
     end
 end
-xlabel('Generations')
 
 print(fullfile(prob_path,'analysis','generations-line'),'-dsvg','-painters','-r0')
 legend(linealg, algorithms);
@@ -116,7 +117,7 @@ print(fullfile(prob_path,'analysis','generations-line-legend'),'-dsvg','-painter
 %% Bar plot of last generation
 %figure;
 
-figure('visible','off','position',[0,0,width,height])
+figure('visible','off','position',[0,0,width,height+200]) % Extra width to prevenet x tick labels from being cut
 
 plot_ind = 1;
 for metr_ind = 1:length(metrics)
@@ -128,7 +129,7 @@ for metr_ind = 1:length(metrics)
         stde(alg_ind,1) = stats.(algorithms{alg_ind}).(metrics{metr_ind}).std(end);
     end
     ylabel(metric_names(metrics{metr_ind}),'Interpreter','latex');
-
+    
     y = meane;                  %The data.
     s = stde;                   %The standard deviation.
     aHand = gca;

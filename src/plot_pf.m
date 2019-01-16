@@ -3,7 +3,7 @@ function plot_pf(prob_path,row_by_col)
 % Do not plot replicates since it is TMI
 
 if ~exist('row_by_col','var')
-    row_by_col=[4,3];
+    row_by_col=[3,4];
 end
 %%
 [results, algorithms, n_replicates] = load_results(prob_path);
@@ -20,12 +20,12 @@ width=ncols*300;
 height=nrows*300;
 %figure('Renderer', 'painters', 'Position', [10 10 900 600])
 figure('visible','off','position',[0,0,width,height])
-colors = linspecer(length(algorithms));
+colors = [sns_colors; sns_colors('deep')];
 
 plot_ind = 1;
 for row_ind = 1:nrows
     for col_ind = 1:ncols
-        if plot_ind >length(algorithms)
+        if plot_ind > length(algorithms)
             break
         end
         subplot(nrows,ncols, plot_ind)
@@ -35,8 +35,8 @@ for row_ind = 1:nrows
         xlabel(pn.prod_name{1})
         ylabel(pn.prod_name{2})
         zlabel(pn.prod_name{3})
-        set(get(gca,'xlabel'),'rotation',30)
-        set(get(gca,'ylabel'),'rotation',-30 )
+       % set(get(gca,'xlabel'),'rotation',30)
+       % set(get(gca,'ylabel'),'rotation',-30 )
         xlim([0,1])
         ylim([0,1])
         zlim([0,1])
