@@ -1,4 +1,4 @@
-function [Score,PopObj] = HV(PopObj,PF)
+function [Score,PopObj] = HV_platemo(PopObj,PF)
 % <metric> <max>
 % Hypervolume
 

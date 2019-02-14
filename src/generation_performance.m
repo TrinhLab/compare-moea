@@ -29,7 +29,7 @@ for metric_ind = 1:length(metrics)
         for rep_ind = 1:n_replicates
             populations = results.(algorithms{alg_ind})(rep_ind).populations;
             for interval_ind =1:length(populations)
-                if strcmp(metrics{metric_ind},'HV')
+                if any(strcmp(metrics{metric_ind},{'HV','HV_platemo'})) %strcmp(metrics{metric_ind},'HV')
                     score = metric_handle(populations(interval_ind).PF, refPoint);
                     
                 elseif any(strcmp(metrics{metric_ind},{'PD','MD', 'Coverage'})) %these metrics assume maximization

@@ -1,9 +1,6 @@
 # General description
- A variety of algorithms are tested with a simple 3 objective problem in a core nework that can be solved quickly and visualized.
-
-# Model
-The `ecoli_core.mat` model was downloaded from [bigg](bigg.ucsd.edu)
-
+ Building on case 1 but with an additional number of products. References are 
+included in the pathway_table.csv for heterologus pathways.
 
 
 

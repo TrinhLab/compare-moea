@@ -3,7 +3,7 @@ function run_moea(c, dp, pn, use_parallel)
 % Write resuls to c.problem_path/raw_output
 % Args:
 %   c (struct): Comparison parameters.
-%   dp (struct): Design parameters passed to modcell2 (e.g. alpha, beta, objective type, etc).
+%   dp (struct): Design parameters passed to ModCell2 (e.g. alpha, beta, objective type, etc).
 %   pn (Class): Prodnet class from ModCell2
 %   use_parallel (bool): If true, each MOEA is run with objective
 %       evaluation performed in parallel, in this case the random number seed
@@ -25,6 +25,7 @@ de = MCdesign(pn);
 de.ga_parameters.use_parallel		= use_parallel;
 de.ga_parameters.stall_generations	= c.sampling_interval;
 de.ga_parameters.progress_plot		= false;
+de.ga_parameters.population_size    = c.population_size;
 
 
 %% main loop
@@ -43,11 +44,11 @@ for rep_ind = 1:c.n_replicates
     rng(rep_ind) % fix rng state
     try
         start_point_info = [];
-        total_max_generations = c.n_generations;%total_generations-population_interval;
+        total_max_generations = c.n_generations;
         total_max_time = 10000000;
         solve_max_gen = true;
         
-        [~, run_time_min, populations] = de.solve_mop(...
+        [mop_solution, run_time_min, populations] = de.solve_mop(...
             dp,start_point_info,total_max_generations,total_max_time, solve_max_gen);
         
         file_id = [algorithms{i},'_',num2str(rep_ind)];
@@ -55,7 +56,8 @@ for rep_ind = 1:c.n_replicates
         out.replicate = rep_ind;
         out.run_time_min = run_time_min;
         out.populations = populations;
-        [~,~,~] = mkdir (c.output_path);% make dir in case it does not exist
+        out.mop_solution = mop_solution;
+        [~,~,~] = mkdir (c.output_path); % make dir in case it does not exist
         parsave(fullfile(c.output_path,file_id), out)
         fprintf('%s saved to ouput folder\n', file_id)
     catch ME
