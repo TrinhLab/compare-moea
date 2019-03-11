@@ -2,7 +2,7 @@
 clear;clc
 root_dir = fileparts(which('compare-moea.m'));
 warning('off','all')
-%diary('run.log')
+diary('run.log')
 
 % load prodnet
 prob_name = 'case2';
@@ -28,7 +28,7 @@ run_moea(c, dp, pn)
 % Clean intermediate files
 rmdir(fullfile(root_dir, prob_name, prob_name), 's')
 
-%diary off
+diary off
 
 % Renable all warnings
 warning('on','all')
