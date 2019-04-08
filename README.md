@@ -13,7 +13,7 @@ CITATION PLACEHOLDER
 	1. The release v1.1 or greater of the [ModCell](<++>) package must be
 	   in your matlab path.
 	2. [matlab_utils](https://github.com/TrinhLab/matlab_utils),  used to make figures.
-2. Simply add the `compare-moea` repository to your matlab path.
+2. Simply add the `compare-moea` files to your matlab path.
 
 ## Credits
 Two external packages are included in this repository:

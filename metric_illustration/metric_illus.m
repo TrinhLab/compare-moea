@@ -1,6 +1,8 @@
 clear;clc
 root_dir = fileparts(which('compare-moea.m'));
 % Choose a very simple 2D PF to show how metrics work
+global FONT_NAME 
+FONT_NAME = 'DejaVu Sans';
 
 pf1 = [0 0; 0 0];
 pf2 = [0.4 0;  0.2 0.2; 0 0.4];
@@ -14,8 +16,8 @@ pf_best = [1 0.8; 0.8 1];
 gen(4).pf = pf_best;
 
 %%
-width=300;
-height=300*2;
+width=250;
+height=230*2;
 figure('visible','off','position',[0,0,width,height])
 
 %% Plots PFs
@@ -45,7 +47,7 @@ legend({'Generation 1', 'Generation 2', 'Generation 3', 'Generation 4/True PF'})
 %print(fullfile(root_dir,'metric_illustration','pf'),'-dsvg','-painters','-r0')
 
 %% Plt gen-metrics
-subplot(2,1,2)j
+subplot(2,1,2)
 colors = sns_colors;
 
 metrics = {'Coverage','HV','Epsilon','GD','IGD','DeltaP'};
